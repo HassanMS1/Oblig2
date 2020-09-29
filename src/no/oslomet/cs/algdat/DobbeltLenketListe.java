@@ -43,11 +43,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        throw new UnsupportedOperationException();
+       // throw new UnsupportedOperationException();
     }
 
     public DobbeltLenketListe(T[] a) {
         Objects.requireNonNull(a,"Tabellen er null");
+        for (int i=0; i<a.length;i++){
+            // hvis verdi er ikke null gå videre
+            if(a[i]!=null){
+
+            }
+        }
     }
 
     public Liste<T> subliste(int fra, int til){
