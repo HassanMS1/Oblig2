@@ -63,8 +63,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                     ny_node.forrige=hale;
                     hale=ny_node;
                 }
-
-
+                endringer++;
+                antall++;
 
             }
         }
@@ -76,12 +76,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        throw new UnsupportedOperationException();
+        return antall;
     }
 
     @Override
     public boolean tom() {
-        throw new UnsupportedOperationException();
+       if(antall==0){
+           return true;
+       }
+       else return false;
     }
 
     @Override
