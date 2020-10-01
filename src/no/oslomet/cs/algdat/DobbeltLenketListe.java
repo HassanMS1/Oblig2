@@ -47,10 +47,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
+
         Objects.requireNonNull(a,"Tabellen er null");
         for (int i=0; i<a.length;i++){
             // hvis verdi er ikke null gå videre
             if(a[i]!=null){
+                Node ny_node = new Node(a[i]);
+
+                // hvis den lenked list er tom, så lag en ny node som hode
+                if (hode==null){
+                    hode=ny_node;
+                    hale = ny_node;
+                }else {
+                    hale.neste=ny_node;
+                    ny_node.forrige=hale;
+                    hale=ny_node;
+                }
+
+
 
             }
         }
