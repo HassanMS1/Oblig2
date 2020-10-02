@@ -89,7 +89,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException();
+        Objects.requireNonNull(verdi, "Table is null!");
+        Node node = new Node(verdi);
+        if(hode == null) {
+            hode = node;
+            hale = hode;
+        } else {
+            hale.neste = node;
+            node.forrige = hale;
+            hale = node;
+        }
+        endringer++;
+        antall++;
+        return true;
     }
 
     @Override
@@ -134,7 +146,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+        // lager ny StringBuilder object og setter
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        // sjekker om listen er tom og hvis ikke legger node verdien i stringbuilder object
+        if (antall > 0){
+            Node <T> nyN = hode;
+            while (nyN !=null){
+                builder.append(hode.verdi);
+                builder.append(", ");
+                nyN = nyN.neste;
+            }
+            // slett siste komma fra builder objektet
+            builder.delete(builder.length() - 1, builder.length());
+        }
+        //sletter mellomrom man legger til ] på slutten av objektet
+        builder.delete(builder.length()-1,builder.length());
+        builder.append("]");
+        return builder.toString();
     }
 
     public String omvendtString() {
