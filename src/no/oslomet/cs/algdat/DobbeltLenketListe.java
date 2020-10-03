@@ -153,17 +153,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (antall > 0){
             Node <T> nyN = hode;
             while (nyN !=null){
-                builder.append(hode.verdi);
+                builder.append(nyN.verdi);
                 builder.append(", ");
                 nyN = nyN.neste;
             }
             // slett siste komma fra builder objektet
             builder.delete(builder.length() - 1, builder.length());
         }
-        //slett mellom før man legger til ]
-        if(builder.length()>=2){
+        //slett mellomrom før man legger til ] hvis og bare hvis den koden  gikk in while  loopen og la til elementer
+        if(builder.length()>1){
             builder.delete(builder.length() - 1, builder.length());
         }
+        // ellers legg til ]
         builder.append("]");
         return builder.toString();
     }
@@ -184,8 +185,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             // slett siste komma fra builder objektet
             builder.delete(builder.length() - 1, builder.length());
         }
-        //slett mellom før man legger til ]
-        if(builder.length()>=2){
+        //slett mellomrom før man legger til ] hvis og bare hvis den koden  gikk in while  loopen og la til elementer
+        if(builder.length()>1){
             builder.delete(builder.length() - 1, builder.length());
         }
         builder.append("]");
