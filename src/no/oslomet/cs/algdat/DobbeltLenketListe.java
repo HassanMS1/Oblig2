@@ -161,29 +161,33 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             builder.delete(builder.length() - 1, builder.length());
         }
         //slett mellom før man legger til ]
-        builder.delete(builder.length()-1,builder.length());
+        if(builder.length()>=2){
+            builder.delete(builder.length() - 1, builder.length());
+        }
         builder.append("]");
         return builder.toString();
     }
 
     public String omvendtString() {
-
+        // akkurat samme metode som toString men bare baklengs starter på hode, vi går fra hale
         // lager ny StringBuilder object og setter
         StringBuilder builder = new StringBuilder();
         builder.append("[");
         // henter verdiene til alle node og setter dem in stringbuilder object hvis de ikke er tom
         if (antall > 0){
-            Node <T> nyN = hode;
+            Node <T> nyN = hale;
             while (nyN !=null){
-                builder.append(hode.verdi);
+                builder.append(nyN.verdi);
                 builder.append(", ");
-                nyN = nyN.neste;
+                nyN = nyN.forrige;
             }
             // slett siste komma fra builder objektet
             builder.delete(builder.length() - 1, builder.length());
         }
         //slett mellom før man legger til ]
-        builder.delete(builder.length()-1,builder.length());
+        if(builder.length()>=2){
+            builder.delete(builder.length() - 1, builder.length());
+        }
         builder.append("]");
         return builder.toString();
     }
