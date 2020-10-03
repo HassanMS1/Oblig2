@@ -149,7 +149,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         // lager ny StringBuilder object og setter
         StringBuilder builder = new StringBuilder();
         builder.append("[");
-        // sjekker om listen er tom og hvis ikke legger node verdien i stringbuilder object
+        // henter verdiene til alle node og setter dem in stringbuilder object hvis de ikke er tom
         if (antall > 0){
             Node <T> nyN = hode;
             while (nyN !=null){
@@ -160,14 +160,32 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             // slett siste komma fra builder objektet
             builder.delete(builder.length() - 1, builder.length());
         }
-        //sletter mellomrom man legger til ] på slutten av objektet
+        //slett mellom før man legger til ]
         builder.delete(builder.length()-1,builder.length());
         builder.append("]");
         return builder.toString();
     }
 
     public String omvendtString() {
-        throw new UnsupportedOperationException();
+
+        // lager ny StringBuilder object og setter
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        // henter verdiene til alle node og setter dem in stringbuilder object hvis de ikke er tom
+        if (antall > 0){
+            Node <T> nyN = hode;
+            while (nyN !=null){
+                builder.append(hode.verdi);
+                builder.append(", ");
+                nyN = nyN.neste;
+            }
+            // slett siste komma fra builder objektet
+            builder.delete(builder.length() - 1, builder.length());
+        }
+        //slett mellom før man legger til ]
+        builder.delete(builder.length()-1,builder.length());
+        builder.append("]");
+        return builder.toString();
     }
 
     @Override
