@@ -4,13 +4,8 @@ package no.oslomet.cs.algdat;
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
 
-import java.util.Comparator;
-import java.util.ConcurrentModificationException;
-import java.util.NoSuchElementException;
-import java.util.StringJoiner;
+import java.util.*;
 
-import java.util.Iterator;
-import java.util.Objects;
 import java.util.function.Predicate;
 
 
@@ -71,7 +66,26 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Liste<T> subliste(int fra, int til){
-        throw new UnsupportedOperationException();
+        // lager en blank liste
+        List<T> nodeList = new ArrayList<>();
+        // metode for å validere fra og til
+        //fratilKontrol(fra, til); den metoden skal er ikke lagt enda
+
+        int teller = 1;
+        Node<T> Nyn = hode;
+        // traverse all the node from begnning to end
+        while (Nyn != null) {
+            // hvis teller er større enn fra og til eller like til
+            // lage verdi i list
+            if (teller > fra && teller <= til) {
+                nodeList.add(Nyn.verdi);
+            }
+            // øker teller
+            teller++;
+            Nyn = Nyn.neste;
+        }
+        // return list
+        return nodeList;
     }
 
     @Override
@@ -127,7 +141,29 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T oppdater(int indeks, T nyverdi) {
-        throw new UnsupportedOperationException();
+        // sjekker for null verdi og kaster unntak isåfall
+        Objects.requireNonNull(nyverdi, "Tabellen er null!");
+
+        // validerer indeks
+        indeksKontroll(indeks, false);
+
+        Node<T> nyN = hode;
+        int teller = 0;
+        // traverse all the node and find and update the given index
+        while (nyN != null) {
+            if (teller == indeks) {
+                // hvis indeks matcher en posisjon, bytt den gammle node med den nye verdi
+                T temp = nyN.verdi;
+                nyN.verdi = nyverdi;
+                endringer++;
+                // returner den gammle node
+                return temp;
+            }
+            teller++;
+            nyN = nyN.neste;
+        }
+        // ikke funnet noe
+        return null;
     }
 
     @Override
@@ -236,10 +272,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
         return null;
     }
-
-        /*public void indeksKontroll (int indeks){
-
-    }*/
 
 
     @Override
