@@ -89,7 +89,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean leggInn(T verdi) {
-        Objects.requireNonNull(verdi, "Table is null!");
+        // kaster exception ved null verdier
+        Objects.requireNonNull(verdi, "Tabellen er null!");
         Node node = new Node(verdi);
         if(hode == null) {
             hode = node;
@@ -116,7 +117,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
-        throw new UnsupportedOperationException();
+        return finnNode(indeks);
     }
 
     @Override
@@ -144,6 +145,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         throw new UnsupportedOperationException();
     }
 
+    // Oppgave 2
     @Override
     public String toString() {
         // lager ny StringBuilder object og setter
@@ -192,6 +194,51 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         builder.append("]");
         return builder.toString();
     }
+
+    // Oppgave 3A
+    // private methode for å finne tilhørende node til en indeks
+    private Node<T> finnNode(int indeks){
+        // hvis indeks er mindre enn anntall / 2 så skal letting start fra hode og mot høyre ellers motsatt
+        if(indeks <antall /2 ){
+            Node <T> node = hode;
+            int teller = 0;
+            while (node!=null){
+                // når teller er like indeks har vi funnet noden
+                if (teller==indeks){
+                    return node;
+                }
+                // øke teller
+                teller++;
+                // peke til neste node
+                node =node.neste;
+
+            }
+        }else {
+            // Nå gjør vi bare det motsatte av forigge if koden og starter fra hale
+            // går mot venstre
+            Node <T> node = hale;
+            int teller = 0;
+            while (node!=null){
+                // når teller er like indeks har vi funnet noden
+                if (teller==indeks){
+                    return node;
+                }
+                // øke teller
+                teller++;
+                // peke til neste node
+                node =node.forrige;
+
+            }
+
+
+        }
+        return null;
+    }
+
+        /*public void indeksKontroll (int indeks){
+
+    }*/
+
 
     @Override
     public Iterator<T> iterator() {
