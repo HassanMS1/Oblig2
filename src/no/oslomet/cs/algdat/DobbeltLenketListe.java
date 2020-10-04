@@ -198,6 +198,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     // Oppgave 3A
     // private methode for å finne tilhørende node til en indeks
     private Node<T> finnNode(int indeks){
+        indeksKontroll(indeks,false); // validerer index nå og kaster unntakk ved feil index
+
         // hvis indeks er mindre enn anntall / 2 så skal letting start fra hode og mot høyre ellers motsatt
         if(indeks <antall /2 ){
             Node <T> node = hode;
