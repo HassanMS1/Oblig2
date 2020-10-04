@@ -117,7 +117,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
-        return finnNode(indeks);
+        return finnNode(indeks).verdi;
     }
 
     @Override
