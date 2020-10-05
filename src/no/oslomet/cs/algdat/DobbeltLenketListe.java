@@ -65,15 +65,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
     }
 
-    public Liste<T> subliste(int fra, int til){
+    public List<T> subliste(int fra, int til){
         // lager en blank liste
         List<T> nodeList = new ArrayList<>();
         // metode for å validere fra og til
-        //fratilKontrol(fra, til); den metoden skal er ikke lagt enda
+        fratilKontrol(fra, til); //den metoden skal er ikke lagt enda
 
         int teller = 1;
         Node<T> Nyn = hode;
-        // traverse all the node from begnning to end
+        // traverse alle nodene
         while (Nyn != null) {
             // hvis teller er større enn fra og til eller like til
             // lage verdi i list
@@ -85,7 +85,26 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             Nyn = Nyn.neste;
         }
         // return list
-        return nodeList;
+        return  nodeList;
+    }
+    // valider fra og til indeks for sublist metoden
+    private void fratilKontrol(int fra, int til) {
+        //  kast IndexOutOfBoundsException hvis  fra er negative
+        if (fra < 0) {
+            throw new IndexOutOfBoundsException("fra kan ikke være negative");
+        }
+        // kast unntakk hvis fra er større enn til
+        if (fra > til) {
+            throw new IllegalArgumentException("fra " + fra + " kan ikke være større enn " + til);
+        }
+        // kast unntak hvis fr er støørre en list lengde
+        if (fra > antall) {
+            throw new IndexOutOfBoundsException("indeks " + fra + " er ikke valid");
+        }
+        // kast unntakk hvis til er større enn antall
+        if (til > antall) {
+            throw new IndexOutOfBoundsException("indeks " + til + " er ikke valid");
+        }
     }
 
     @Override
@@ -255,20 +274,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             // Nå gjør vi bare det motsatte av forigge if koden og starter fra hale
             // går mot venstre
             Node <T> node = hale;
-            int teller = 0;
+            int teller = antall; // fikset begynnt teller fra bakerst ikke 0!
             while (node!=null){
                 // når teller er like indeks har vi funnet noden
+                teller--;
                 if (teller==indeks){
                     return node;
                 }
-                // øke teller
-                teller++;
+                // her var det forsinkelse i koden som er fjernet  nå, trenger ikke å oke teller her.
                 // peke til neste node
                 node =node.forrige;
 
             }
-
-
         }
         return null;
     }
