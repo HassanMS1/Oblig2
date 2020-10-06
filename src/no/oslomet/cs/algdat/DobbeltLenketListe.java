@@ -155,7 +155,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int indeksTil(T verdi) {
-        throw new UnsupportedOperationException();
+
+        // teller hvilke indeks vi er på
+        int indeksTeller = 0;
+        // lager hode til peker
+        Node<T> nyN = hode;
+        // går gjennom verdier til jeg finner en peker som er har like
+        while (nyN != null) {
+            // hvis de verdine matcher i listen returner indeks ved indeksTeller
+            if (nyN.verdi.equals(verdi)) {
+                // return index
+                return indeksTeller;
+            }
+            //  gå til neste verdi og øke teller
+            nyN = nyN.neste;
+            indeksTeller++;
+        }
+        // ikke funnet en matchende verdie returner -1
+        return -1;
+
     }
 
     @Override
