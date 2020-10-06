@@ -140,12 +140,39 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new UnsupportedOperationException();
+
+        // sjekk om verdi er null hvis null kast untakk
+        if (verdi == null) {
+            throw new NullPointerException("Verdi kan ikke være null");
+        }
+        // sjekker index, hvis den er negative og større enn antall kast untakk
+        if (indeks < 0 || indeks > antall) {
+            throw new IndexOutOfBoundsException("ugyldig verdi");
+        }
+
+        // lage ny node
+        Node<T> node = new Node(verdi);
+        // trenger logikken nede for å plassere verdi riktig
+
+
+
+
+
+
+
+
+
     }
 
     @Override
     public boolean inneholder(T verdi) {
-        throw new UnsupportedOperationException();
+        // sjekk om verdi finnes i listen ved bruke indeksTil.
+        //Hvis ikke returnerer -1, returner true
+        if (indeksTil(verdi) != -1) {
+            return true;
+        }
+        // verdi finnes ikke return fasle
+        return false;
     }
 
     @Override
