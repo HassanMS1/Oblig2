@@ -154,9 +154,27 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Node<T> node = new Node(verdi);
         // trenger logikken nede for å plassere verdi riktig
 
+        // sjekker om listen er tom ved sjekke om hoden er tom
+        if (hode == null) {
+            // hvis sant, både hode og hale peker til sammen node
+            hode = node;
+            hale = hode;
+        } else if (indeks == 0) {
+            // hvis indeks er 0, det betyr plasser i starten av listen
+            node.neste = hode;
+            hode.forrige = node;
+            hode = node;
+        }
+        else if (antall == indeks) {
+            // men hvis index er like antall d.v.s lag en ny node i på slutten av listen
+            hale.neste = node;
+            node.forrige = hale;
+            hale = node;
+        }
 
-
-
+        // legger til enderinger og antall
+        endringer ++;
+        antall++;
 
 
 
