@@ -171,6 +171,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             node.forrige = hale;
             hale = node;
         }
+        else {
+            // hvis det forrige kravene er ikke møt, så betyr det plasser mellom to noder
+            // lag ny node først
+            Node<T> nyNode = hode;
+            // går gjennom listen fra index 1 til en mindre indeks
+            // og legger til node i mellom
+            for (int count = 1; count < indeks; count++)
+                nyNode = nyNode.neste;
+            node.neste = nyNode.neste;
+            nyNode.neste = node;
+            node.forrige = nyNode;
+            node.neste.forrige = node;
+        }
 
         // legger til enderinger og antall
         endringer ++;
@@ -250,12 +263,75 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean fjern(T verdi) {
-        throw new UnsupportedOperationException();
+
+
+        if (verdi == null) {
+            return false;
+        } else if (hode == null) {
+            return false;
+        } else {
+            Node<T> ptr = hode;
+
+            while (ptr != null) {
+                if (ptr.verdi == verdi) {
+                    del(ptr);
+                    return true;
+                }
+                ptr = ptr.neste;
+            }
+        }
+        return false;
+
+    }
+    public void del(Node node1) {
+        if (node1.forrige != null) { //node er ikke hode
+            node1.forrige.neste = node1.neste;
+        } else { //node er hode
+            hode = node1.neste;
+        }
+
+        if (node1.neste != null) {
+            node1.neste.forrige = node1.forrige;
+        }
     }
 
     @Override
     public T fjern(int indeks) {
-        throw new UnsupportedOperationException();
+        fratilKontrol(indeks,antall);
+        if (indeks < 0 || indeks > antall) {
+            throw new IndexOutOfBoundsException("invalid index");
+        }
+        Node<T> nyN = hode;
+        if (indeks == 0) {
+            Node<T> temp = hode;
+            if (hode.neste == null) {
+                hale = null;
+            } else {
+                hode.neste.forrige = null;
+            }
+            hode = hode.neste;
+            antall--;
+            return temp.verdi;
+        } else if (indeks == antall) {
+            Node<T> temp = hale;
+            if (hode.neste == null) {
+                hode = null;
+            } else {
+                hale.forrige.neste = null;
+            }
+            hale = hale.forrige;
+            antall--;
+            return temp.verdi;
+        } else {
+            for (int j = 0; j < indeks && nyN.neste != null; j++) {
+                nyN = nyN.neste;
+            }
+            nyN.forrige.neste = nyN.neste;
+            nyN.neste.forrige = nyN.forrige;
+            antall--;
+        }
+        return nyN.verdi;
+
     }
 
     @Override
