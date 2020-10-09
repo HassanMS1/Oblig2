@@ -42,8 +42,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
-
+        // sjekker om tabellen er null
         Objects.requireNonNull(a,"Tabellen er null");
+
         for (int i=0; i<a.length;i++){
             // hvis verdi er ikke null gå videre
             if(a[i]!=null){
@@ -69,7 +70,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         // lager en blank liste
         List<T> nodeList = new ArrayList<>();
         // metode for å validere fra og til
-        fratilKontrol(fra, til); //den metoden skal er ikke lagt enda
+        fratilKontrol(fra, til); //sjekker om de indeksene er lovlig
 
         int teller = 1;
         Node<T> Nyn = hode;
