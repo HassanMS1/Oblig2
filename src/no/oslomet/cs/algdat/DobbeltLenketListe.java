@@ -263,74 +263,91 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean fjern(T verdi) {
-
-
-        if (verdi == null) {
-            return false;
-        } else if (hode == null) {
+        /* returner false hvis verdi er null eller
+        * Ellers se gjennom traverse gjennom listen og slett
+        * verdi som fra listen */
+        if (hode == null) {
             return false;
         } else {
-            Node<T> ptr = hode;
-
-            while (ptr != null) {
-                if (ptr.verdi == verdi) {
-                    del(ptr);
+            Node<T> nyn = hode;
+            while (nyn != null) {
+                if (nyn.verdi.equals(verdi)) {
+                    del(nyn);
                     return true;
                 }
-                ptr = ptr.neste;
+                nyn = nyn.neste;
             }
         }
         return false;
 
     }
+    // methode som betyr peker / sletter node fra listen, kalles fra fjern () metodene
     public void del(Node node1) {
-        if (node1.forrige != null) { //node er ikke hode
-            node1.forrige.neste = node1.neste;
-        } else { //node er hode
-            hode = node1.neste;
-        }
 
-        if (node1.neste != null) {
+        LinkedList list;
+        if(node1 == hode && hode.neste == null && hode.forrige == null) {
+            hode=null;
+            hale = null;
+            antall --;
+        } else if(node1 == hode && hode.neste != null) {
+            hode = hode.neste;
+            hode.forrige = null;
+            antall--;
+            endringer++;
+        } else if(node1 == hale && hale.forrige != null) {
+            hale = hale.forrige;
+            hale.neste=null;
+            antall--;
+            endringer++;
+        } else {
+            node1.forrige.neste = node1.neste;
             node1.neste.forrige = node1.forrige;
+            antall--;
+            endringer++;
         }
     }
 
     @Override
     public T fjern(int indeks) {
         fratilKontrol(indeks,antall);
-        if (indeks < 0 || indeks > antall) {
+        // sjekker om index er negative eller større en antall-1
+        // kaster unntakk isåfall
+        if (indeks < 0 || indeks >= antall) {
             throw new IndexOutOfBoundsException("invalid index");
         }
-        Node<T> nyN = hode;
-        if (indeks == 0) {
+        Node<T> current = hode;
+        if(hode == null) {
+            throw new IndexOutOfBoundsException("no element found ");
+        } else if (indeks == 0) {
             Node<T> temp = hode;
-            if (hode.neste == null) {
-                hale = null;
-            } else {
-                hode.neste.forrige = null;
-            }
-            hode = hode.neste;
+           // kaller på methode for slette node på indeks 0
+            del(temp);
+           /*
+            hode = hode.nest
+            hode.forrige = null;
+
             antall--;
+            enderinger++;*/
             return temp.verdi;
-        } else if (indeks == antall) {
+        } else if (indeks == (antall-1)) {
             Node<T> temp = hale;
-            if (hode.neste == null) {
-                hode = null;
-            } else {
-                hale.forrige.neste = null;
-            }
             hale = hale.forrige;
+            hale.neste = null;
             antall--;
+            endringer ++;
             return temp.verdi;
         } else {
-            for (int j = 0; j < indeks && nyN.neste != null; j++) {
-                nyN = nyN.neste;
+            int count = 1;
+            while(count <= indeks) {
+                current = current.neste;
+                count++;
             }
-            nyN.forrige.neste = nyN.neste;
-            nyN.neste.forrige = nyN.forrige;
+            current.forrige.neste = current.neste;
+            current.neste.forrige = current.forrige;
             antall--;
+            endringer++;
         }
-        return nyN.verdi;
+        return current.verdi;
 
     }
 
