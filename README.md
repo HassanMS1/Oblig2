@@ -17,7 +17,7 @@ Oppgaven er levert av følgende studenter:
 * Hassan Mahamed Sheikh, s148134, s148134@oslomet.no
 * Alene
 
-Jeg har bruker så langt .... commites
+Jeg har gjort 21 commites
 
 I oppgaven har vi hatt følgende arbeidsfordeling:
 * Alene / fant ikke gruppe
@@ -47,9 +47,9 @@ oppgave bedre.
              I sublisten , sjekker om indeksene er lovlig også henter hver verdie fra listen og legger den inn i ny 
              list og returner den listen. fratilKontroll () sjekker indeks og kaster unntakk om nødvendig.
 
-* Oppgave 4: Ganske rett fram løsning har metoder her. I indexTil () Bruker jeg while løkke for gå gjennom listen og 
-             bruker en bruker equalt () i if setning  for sjekke verdi finnes , samtidig som  jeg bruker en teller for
-             holde rett op index løpet i listen. Hvis verdi finnes i listen så return index/teller  eller return -1.
+* Oppgave 4: Ganske rett fram løsning methode her. I indexTil () bruker jeg while løkke for gå gjennom listen og 
+             bruker equal() i if setning  for sjekke om verdi finnes i listen, samtidig som  jeg bruker en teller for
+             holde rett på index løpet i listen. Hvis verdi finnes i listen så return index/teller  eller return -1.
              I  boolean Innholder() bruker jeg indexTil () for å bekrefte om index finnes ellers return false.   
                                 
 * Oppgave 5: I legg(indeks, verdi) methode , validere jeg først om indeks og verdi er lovelig etter kraven ellers kaster 
