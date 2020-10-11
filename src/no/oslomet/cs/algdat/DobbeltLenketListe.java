@@ -289,7 +289,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             // hvis sant nullstill hode og hale
             hode=null;
             hale = null;
-
+            antall--;
         } else if(node1 == hode && hode.neste != null) {
             hode = hode.neste;
             hode.forrige = null;
