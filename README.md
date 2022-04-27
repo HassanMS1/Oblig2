@@ -20,8 +20,7 @@ Oppgaven er levert av følgende studenter:
 Jeg har gjort 21 commites
 
 I oppgaven har vi hatt følgende arbeidsfordeling:
-* Alene / fant ikke gruppe
-
+* Alene 
 
 # Beskrivelse av oppgaveløsning (maks 5 linjer per oppgave)
 
